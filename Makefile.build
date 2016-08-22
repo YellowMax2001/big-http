@@ -1,0 +1,38 @@
+PHONY := __build
+__build:
+
+obj-y :=
+subdir-y :=
+
+include Makefile
+
+__subdir-y := $(patsubst %/,%,$(filter %/, $(obj-y)))
+subdir-y += $(__subdir-y)
+
+subdir_objs := $(foreach f,$(subdir-y),$(f)/built-in.o)
+
+cur_objs := $(filter-out %/, $(obj-y))
+dep_files := $(foreach f,$(cur_objs),.$(f).d)
+dep_files := $(wildcard $(dep_files))
+
+ifneq ($(dep_files),)
+	include $(dep_files)
+endif
+
+PHONY += $(subdir-y)
+
+__build : $(subdir-y) built-in.o
+
+$(subdir-y):
+	@ make -C $@ -f $(TOP_DIR)/Makefile.build
+
+built-in.o : $(cur_objs) $(subdir_objs)
+	@ echo "LD built-in.o"
+	@ $(LD) -r -o $@ $^
+
+%.o : %.c
+	@ echo CC $< $@
+	@ $(CC) $(CFLAGS) -Wp,-MD,.$@.d -c -o $@ $<
+
+.PHONY : $(PHONY)
+

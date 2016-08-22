@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./test_files/1324746"></script>
+
+<title>HTTP协议详解（真的很经典） - Hundre - 博客园</title><script async="" src="./test_files/core.php"></script>
+<link type="text/css" rel="stylesheet" href="./test_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./test_files/bundle-Minyx2_Lite.css">
+<link type="text/css" rel="stylesheet" href="./test_files/45748.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/li0803/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/li0803/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/li0803/wlwmanifest.xml">
+<script src="./test_files/jquery.js.下载" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'li0803', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./test_files/blog-common.js.下载" type="text/javascript"></script>
+<script src="./test_files/bundle-Minyx2_Lite.js.下载" language="javascript" type="text/javascript"></script>
+<style type="text/css">
+.c_ad_block,[id^="div-gpt-ad-"],#ibanner {display:none!important;display:none}[id="bb9c190068b8405587e5006f905e790c"]{display:none;position:absolute;top:-1000000px;visibility:hidden}</style>
+<script language="javascript" type="text/javascript" src="./test_files/35ff706fd57d11c141cdefcd58d6562b.js.下载" charset="gb2312"></script><script type="text/javascript">
+hQGHuMEAyLn('[id="bb9c190068b8405587e5006f905e790c"]');</script></head>
+<body>
+<a name="top"></a>
+
+
+<div id="container">
+    <a class="minyx" href="http://www.cnblogs.com/">代码改变世界</a>
+    <ul id="topMnu">
+        <!-- 统计数据 -->
+        <li>
+            
+                
+Posts - 56, 
+Articles - 0, 
+Comments - 113
+<!---->
+            
+        </li>
+        <!-- 这边可以增加一些链接 -->
+        <!-- 博客园 -->
+        <li><a href="http://www.cnblogs.com/">Cnblogs</a></li>
+        <!-- 管理 -->
+        <li id="topMnu-dashboard">
+            <a id="lnkDashboard" href="http://www.cnblogs.com/li0803/admin/EditPosts.aspx">Dashboard</a></li>
+        <li>
+            <a id="lnkLogin" href="http://passport.cnblogs.com/login.aspx?ReturnUrl=http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html">Login</a></li>
+    </ul>
+
+    <script type="text/javascript">
+        var m = window.__blog.topMenuRendered;
+        if (m) { m(__$("topMnu")); }
+    </script>
+
+    <div id="header">
+        <ul id="menu">
+            <!-- 首页，当前section加上current类 -->
+            <li id="menu-home" class="current">
+                <a id="lnkHome" href="http://www.cnblogs.com/li0803/">Home</a></li>
+            <!-- 联系 -->
+            <li id="menu-contact">
+                <a id="lnkContact" href="http://space.cnblogs.com/msg/send/Hundre">Contact</a></li>
+            <!-- 相册 -->
+            <li id="menu-gallary">
+                <a id="lnkGallery" href="http://www.cnblogs.com/li0803/gallery.html">Gallery</a></li>
+            <!-- Rss订阅 -->
+            <li id="rss">
+                <a id="lnkRss" href="http://www.cnblogs.com/li0803/rss">RSS</a></li>
+        </ul>
+        <div id="newmsg"></div>
+        <h1>
+            <!-- 主标题 -->
+            <a id="lnkBlogTitle" href="http://www.cnblogs.com/li0803/">老李的地下室</a>
+            <!-- 子标题 -->
+            <small>
+                奶粉、尿布，快到碗里来</small>
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.headerRendered;
+        if (m) { m(__$("header")); }
+    </script>
+
+    <div id="wrapper">
+        <div id="content">
+            <script type="text/javascript">
+                var m = window.__blog.preRenderPosts;
+                if (m) { m(); }
+            </script>
+            
+<div id="post_detail">
+<div class="post" id="post">
+    <a name="top"></a>
+    <h2><a id="cb_post_title_url" href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html">HTTP协议详解（真的很经典）</a></h2>
+    <small>2008-11-03 09:11 by Hundre, <span id="post_view_count">743608</span> 阅读, <span id="post_comment_count">34</span> 评论, <a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#" onclick="AddToWz(1324746);return false;">收藏</a>,  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=1324746" rel="nofollow">编辑</a></small>
+    <div class="entry">
+        <div id="cnblogs_post_body"><p><strong>转自：<a href="http://blog.csdn.net/gueter/archive/2007/03/08/1524447.aspx">http://blog.csdn.net/gueter/archive/2007/03/08/1524447.aspx</a></strong></p>
+<p><strong>Author :Jeffrey<br>
+</strong></p>
+<p><span style="font-size: x-small;"><span style="color: #000000;"><strong><span style="font-size: small;"><span style="font-size: medium;"><span style="font-size: small;">引言</span></span></span></strong><span style="font-size: small;"><span style="font-size: medium;"><span style="font-size: small;"><br>
+</span></span></span></span></span></p>
+<p><span style="color: #000000; font-size: x-small;"><span style="font-size: small;"><span style="font-size: medium;"><span style="font-size: small;">HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。目前在WWW中使用的是HTTP/1.0的第六版，HTTP/1.1的规范化工作正在进行之中，而且HTTP-NG(Next Generation of HTTP)的建议已经提出。<br>
+HTTP协议的主要特点可概括如下：<br>
+1.支持客户/服务器模式。<br>
+2.简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。<br>
+3.灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。<br>
+4.无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。<br>
+5.无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</span></span></span></span></p>
+<p>&nbsp;</p>
+<p><strong><span style="color: #000000;">一、HTTP协议详解之URL篇</span></strong></p>
+<p><span style="color: #000000;">&nbsp;&nbsp;&nbsp; http（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议，常基于TCP的连接方式，HTTP1.1版本中给出一种持续连接的机制，绝大多数的Web开发，都是构建在HTTP协议之上的Web应用。</span></p>
+<p><span style="color: #000000;">HTTP URL (URL是一种特殊类型的URI，包含了用于查找某个资源的足够的信息)的格式如下：<br>
+</span><a href="http://host[%22%22port][abs_path/"><span style="color: #000000;">http://host[":"port][abs_path</span></a><span style="color: #000000;">]<br>
+http表示要通过HTTP协议来定位网络资源；host表示合法的Internet主机域名或者IP地址；port指定一个端口号，为空则使用缺省端口80；abs_path指定请求资源的URI；如果URL中没有给出abs_path，那么当它作为请求URI时，必须以“/”的形式给出，通常这个工作浏览器自动帮我们完成。<br>
+eg:<br>
+1、输入：</span><a href="http://www.guet.edu.cn/"><span style="color: #000000;">www.guet.edu.cn</span></a><br>
+<span style="color: #000000;">浏览器自动转换成：</span><a href="http://www.guet.edu.cn/"><span style="color: #000000;">http://www.guet.edu.cn/</span></a><br>
+<span style="color: #000000;">2、http:192.168.0.116:8080/index.jsp&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;"><strong>二、HTTP协议详解之请求篇</strong></span></p>
+<p><span style="color: #000000;">&nbsp;&nbsp;&nbsp; http请求由三部分组成，分别是：请求行、消息报头、请求正文</span></p>
+<p><span style="color: #000000;">1、请求行以一个方法符号开头，以空格分开，后面跟着请求的URI和协议的版本，格式如下：Method Request-URI HTTP-Version CRLF&nbsp;&nbsp;<br>
+其中 Method表示请求方法；Request-URI是一个统一资源标识符；HTTP-Version表示请求的HTTP协议版本；CRLF表示回车和换行（除了作为结尾的CRLF外，不允许出现单独的CR或LF字符）。</span></p>
+<p><span style="color: #000000;">请求方法（所有方法全为大写）有多种，各个方法的解释如下：<br>
+GET&nbsp;&nbsp;&nbsp;&nbsp; 请求获取Request-URI所标识的资源<br>
+POST&nbsp;&nbsp;&nbsp; 在Request-URI所标识的资源后附加新的数据<br>
+HEAD&nbsp;&nbsp;&nbsp; 请求获取由Request-URI所标识的资源的响应消息报头<br>
+PUT&nbsp;&nbsp;&nbsp;&nbsp; 请求服务器存储一个资源，并用Request-URI作为其标识<br>
+DELETE&nbsp; 请求服务器删除Request-URI所标识的资源<br>
+TRACE&nbsp;&nbsp; 请求服务器回送收到的请求信息，主要用于测试或诊断<br>
+CONNECT 保留将来使用<br>
+OPTIONS 请求查询服务器的性能，或者查询与资源相关的选项和需求<br>
+应用举例：<br>
+GET方法：在浏览器的地址栏中输入网址的方式访问网页时，浏览器采用GET方法向服务器获取资源，eg:GET /form.html HTTP/1.1 (CRLF)</span></p>
+<p><span style="color: #000000;">POST方法要求被请求服务器接受附在请求后面的数据，常用于提交表单。<br>
+eg：POST /reg.jsp HTTP/ (CRLF)<br>
+Accept:image/gif,image/x-xbit,... (CRLF)<br>
+...<br>
+HOST:www.guet.edu.cn (CRLF)<br>
+Content-Length:22 (CRLF)<br>
+Connection:Keep-Alive (CRLF)<br>
+Cache-Control:no-cache (CRLF)<br>
+(CRLF)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //该CRLF表示消息报头已经结束，在此之前为消息报头<br>
+user=jeffrey&amp;pwd=1234&nbsp; //此行以下为提交的数据</span></p>
+<p><span style="color: #000000;">HEAD方法与GET方法几乎是一样的，对于HEAD请求的回应部分来说，它的HTTP头部中包含的信息与通过GET请求所得到的信息是相同的。利用这个方法，不必传输整个资源内容，就可以得到Request-URI所标识的资源的信息。该方法常用于测试超链接的有效性，是否可以访问，以及最近是否更新。<br>
+2、请求报头后述<br>
+3、请求正文(略)&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;"><strong>三、HTTP协议详解之响应篇</strong></span></p>
+<p><span style="color: #000000;">&nbsp;&nbsp;&nbsp; 在接收和解释请求消息后，服务器返回一个HTTP响应消息。</span></p>
+<p><span style="color: #000000;">HTTP响应也是由三个部分组成，分别是：状态行、消息报头、响应正文<br>
+1、状态行格式如下：<br>
+HTTP-Version Status-Code Reason-Phrase CRLF<br>
+其中，HTTP-Version表示服务器HTTP协议的版本；Status-Code表示服务器发回的响应状态代码；Reason-Phrase表示状态代码的文本描述。<br>
+状态代码有三位数字组成，第一个数字定义了响应的类别，且有五种可能取值：<br>
+1xx：指示信息--表示请求已接收，继续处理<br>
+2xx：成功--表示请求已被成功接收、理解、接受<br>
+3xx：重定向--要完成请求必须进行更进一步的操作<br>
+4xx：客户端错误--请求有语法错误或请求无法实现<br>
+5xx：服务器端错误--服务器未能实现合法的请求<br>
+常见状态代码、状态描述、说明：<br>
+200 OK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //客户端请求成功<br>
+400 Bad Request&nbsp; //客户端请求有语法错误，不能被服务器所理解<br>
+401 Unauthorized //请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用&nbsp;<br>
+403 Forbidden&nbsp; //服务器收到请求，但是拒绝提供服务<br>
+404 Not Found&nbsp; //请求资源不存在，eg：输入了错误的URL<br>
+500 Internal Server Error //服务器发生不可预期的错误<br>
+503 Server Unavailable&nbsp; //服务器当前不能处理客户端的请求，一段时间后可能恢复正常<br>
+eg：HTTP/1.1 200 OK （CRLF）</span></p>
+<p><span style="color: #000000;">2、响应报头后述</span></p>
+<p><span style="color: #000000;">3、响应正文就是服务器返回的资源的内容&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><strong><span style="color: #000000;">四、HTTP协议详解之消息报头篇</span></strong></p>
+<p><span style="color: #000000;">&nbsp;&nbsp;&nbsp; HTTP消息由客户端到服务器的请求和服务器到客户端的响应组成。请求消息和响应消息都是由开始行（对于请求消息，开始行就是请求行，对于响应消息，开始行就是状态行），消息报头（可选），空行（只有CRLF的行），消息正文（可选）组成。</span></p>
+<p><span style="color: #000000;">HTTP消息报头包括普通报头、请求报头、响应报头、实体报头。<br>
+每一个报头域都是由名字+“：”+空格+值 组成，消息报头域的名字是大小写无关的。</span></p>
+<p><span style="color: #000000;">1、普通报头<br>
+在普通报头中，有少数报头域用于所有的请求和响应消息，但并不用于被传输的实体，只用于传输的消息。<br>
+eg：<br>
+Cache-Control&nbsp;&nbsp; 用于指定缓存指令，缓存指令是单向的（响应中出现的缓存指令在请求中未必会出现），且是独立的（一个消息的缓存指令不会影响另一个消息处理的缓存机制），HTTP1.0使用的类似的报头域为Pragma。<br>
+请求时的缓存指令包括：no-cache（用于指示请求或响应消息不能缓存）、no-store、max-age、max-stale、min-fresh、only-if-cached;<br>
+响应时的缓存指令包括：public、private、no-cache、no-store、no-transform、must-revalidate、proxy-revalidate、max-age、s-maxage.<br>
+eg：为了指示IE浏览器（客户端）不要缓存页面，服务器端的JSP程序可以编写如下：response.sehHeader("Cache-Control","no-cache");<br>
+//response.setHeader("Pragma","no-cache");作用相当于上述代码，通常两者//合用<br>
+这句代码将在发送的响应消息中设置普通报头域：Cache-Control:no-cache</span></p>
+<p><br>
+<span style="color: #000000;">Date普通报头域表示消息产生的日期和时间</span></p>
+<p><span style="color: #000000;">Connection普通报头域允许发送指定连接的选项。例如指定连接是连续，或者指定“close”选项，通知服务器，在响应完成后，关闭连接</span></p>
+<p><span style="color: #000000;">2、请求报头<br>
+请求报头允许客户端向服务器端传递请求的附加信息以及客户端自身的信息。<br>
+常用的请求报头<br>
+Accept<br>
+Accept请求报头域用于指定客户端接受哪些类型的信息。eg：Accept：image/gif，表明客户端希望接受GIF图象格式的资源；Accept：text/html，表明客户端希望接受html文本。<br>
+Accept-Charset<br>
+Accept-Charset请求报头域用于指定客户端接受的字符集。eg：Accept-Charset:iso-8859-1,gb2312.如果在请求消息中没有设置这个域，缺省是任何字符集都可以接受。<br>
+Accept-Encoding<br>
+Accept-Encoding请求报头域类似于Accept，但是它是用于指定可接受的内容编码。eg：Accept-Encoding:gzip.deflate.如果请求消息中没有设置这个域服务器假定客户端对各种内容编码都可以接受。<br>
+Accept-Language<br>
+Accept-Language请求报头域类似于Accept，但是它是用于指定一种自然语言。eg：Accept-Language:zh-cn.如果请求消息中没有设置这个报头域，服务器假定客户端对各种语言都可以接受。<br>
+Authorization<br>
+Authorization请求报头域主要用于证明客户端有权查看某个资源。当浏览器访问一个页面时，如果收到服务器的响应代码为401（未授权），可以发送一个包含Authorization请求报头域的请求，要求服务器对其进行验证。<br>
+Host（发送请求时，该报头域是必需的）<br>
+Host请求报头域主要用于指定被请求资源的Internet主机和端口号，它通常从HTTP URL中提取出来的，eg：<br>
+我们在浏览器中输入：</span><a href="http://www.guet.edu.cn/index.html"><span style="color: #000000;">http://www.guet.edu.cn/index.html</span></a><br>
+<span style="color: #000000;">浏览器发送的请求消息中，就会包含Host请求报头域，如下：<br>
+Host：</span><a href="http://www.guet.edu.cn/"><span style="color: #000000;">www.guet.edu.cn</span></a><br>
+<span style="color: #000000;">此处使用缺省端口号80，若指定了端口号，则变成：Host：</span><a href="http://www.guet.edu.cn/"><span style="color: #000000;">www.guet.edu.cn</span></a><span style="color: #000000;">:指定端口号<br>
+User-Agent<br>
+我们上网登陆论坛的时候，往往会看到一些欢迎信息，其中列出了你的操作系统的名称和版本，你所使用的浏览器的名称和版本，这往往让很多人感到很神奇，实际上，服务器应用程序就是从User-Agent这个请求报头域中获取到这些信息。User-Agent请求报头域允许客户端将它的操作系统、浏览器和其它属性告诉服务器。不过，这个报头域不是必需的，如果我们自己编写一个浏览器，不使用User-Agent请求报头域，那么服务器端就无法得知我们的信息了。<br>
+请求报头举例：<br>
+GET /form.html HTTP/1.1 (CRLF)<br>
+Accept:image/gif,image/x-xbitmap,image/jpeg,application/x-shockwave-flash,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/msword,*/* (CRLF)<br>
+Accept-Language:zh-cn (CRLF)<br>
+Accept-Encoding:gzip,deflate (CRLF)<br>
+If-Modified-Since:Wed,05 Jan 2007 11:21:25 GMT (CRLF)<br>
+If-None-Match:W/"80b1a4c018f3c41:8317" (CRLF)<br>
+User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0) (CRLF)<br>
+Host:www.guet.edu.cn (CRLF)<br>
+Connection:Keep-Alive (CRLF)<br>
+(CRLF)</span></p>
+<p><span style="color: #000000;">3、响应报头<br>
+响应报头允许服务器传递不能放在状态行中的附加响应信息，以及关于服务器的信息和对Request-URI所标识的资源进行下一步访问的信息。<br>
+常用的响应报头<br>
+Location<br>
+Location响应报头域用于重定向接受者到一个新的位置。Location响应报头域常用在更换域名的时候。<br>
+Server<br>
+Server响应报头域包含了服务器用来处理请求的软件信息。与User-Agent请求报头域是相对应的。下面是<br>
+Server响应报头域的一个例子：<br>
+Server：Apache-Coyote/1.1<br>
+WWW-Authenticate<br>
+WWW-Authenticate响应报头域必须被包含在401（未授权的）响应消息中，客户端收到401响应消息时候，并发送Authorization报头域请求服务器对其进行验证时，服务端响应报头就包含该报头域。<br>
+eg：WWW-Authenticate:Basic realm="Basic Auth Test!"&nbsp; //可以看出服务器对请求资源采用的是基本验证机制。</span></p>
+<p><br>
+<span style="color: #000000;">4、实体报头<br>
+请求和响应消息都可以传送一个实体。一个实体由实体报头域和实体正文组成，但并不是说实体报头域和实体正文要在一起发送，可以只发送实体报头域。实体报头定义了关于实体正文（eg：有无实体正文）和请求所标识的资源的元信息。<br>
+常用的实体报头<br>
+Content-Encoding<br>
+Content-Encoding实体报头域被用作媒体类型的修饰符，它的值指示了已经被应用到实体正文的附加内容的编码，因而要获得Content-Type报头域中所引用的媒体类型，必须采用相应的解码机制。Content-Encoding这样用于记录文档的压缩方法，eg：Content-Encoding：gzip<br>
+Content-Language<br>
+Content-Language实体报头域描述了资源所用的自然语言。没有设置该域则认为实体内容将提供给所有的语言阅读<br>
+者。eg：Content-Language:da<br>
+Content-Length<br>
+Content-Length实体报头域用于指明实体正文的长度，以字节方式存储的十进制数字来表示。<br>
+Content-Type<br>
+Content-Type实体报头域用语指明发送给接收者的实体正文的媒体类型。eg：<br>
+Content-Type:text/html;charset=ISO-8859-1<br>
+Content-Type:text/html;charset=GB2312<br>
+Last-Modified<br>
+Last-Modified实体报头域用于指示资源的最后修改日期和时间。<br>
+Expires<br>
+Expires实体报头域给出响应过期的日期和时间。为了让代理服务器或浏览器在一段时间以后更新缓存中(再次访问曾访问过的页面时，直接从缓存中加载，缩短响应时间和降低服务器负载)的页面，我们可以使用Expires实体报头域指定页面过期的时间。eg：Expires：Thu，15 Sep 2006 16:23:12 GMT<br>
+HTTP1.1的客户端和缓存必须将其他非法的日期格式（包括0）看作已经过期。eg：为了让浏览器不要缓存页面，我们也可以利用Expires实体报头域，设置为0，jsp中程序如下：response.setDateHeader("Expires","0");</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;"><strong>五、利用telnet观察http协议的通讯过程</strong></span></p>
+<p><span style="color: #000000;">&nbsp;&nbsp;&nbsp; 实验目的及原理：<br>
+&nbsp;&nbsp;&nbsp; 利用MS的telnet工具，通过手动输入http请求信息的方式，向服务器发出请求，服务器接收、解释和接受请求后，会返回一个响应，该响应会在telnet窗口上显示出来，从而从感性上加深对http协议的通讯过程的认识。</span></p>
+<p><span style="color: #000000;">&nbsp;&nbsp;&nbsp; 实验步骤：</span></p>
+<p><span style="color: #000000;">1、打开telnet<br>
+1.1 打开telnet<br>
+运行--&gt;cmd--&gt;telnet</span></p>
+<p><span style="color: #000000;">1.2 打开telnet回显功能<br>
+set localecho</span></p>
+<p><span style="color: #000000;">2、连接服务器并发送请求<br>
+2.1 open&nbsp;</span><a href="http://www.guet.edu.cn/"><span style="color: #000000;">www.guet.edu.cn</span></a><span style="color: #000000;">&nbsp;80&nbsp; //注意端口号不能省略</span></p>
+<p><span style="color: #000000;">&nbsp;&nbsp;&nbsp; HEAD /index.asp HTTP/1.0<br>
+&nbsp;&nbsp;&nbsp; Host:www.guet.edu.cn<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp; /*我们可以变换请求方法,请求桂林电子主页内容,输入消息如下*/<br>
+&nbsp;&nbsp;&nbsp; open&nbsp;</span><a href="http://www.guet.edu.cn/"><span style="color: #000000;">www.guet.edu.cn</span></a><span style="color: #000000;">&nbsp;80&nbsp;<br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp; GET /index.asp HTTP/1.0&nbsp; //请求资源的内容<br>
+&nbsp;&nbsp;&nbsp; Host:www.guet.edu.cn&nbsp;&nbsp;</span></p>
+<p><span style="color: #000000;">2.2 open&nbsp;</span><a href="http://www.sina.com.cn/"><span style="color: #000000;">www.sina.com.cn</span></a><span style="color: #000000;">&nbsp;80&nbsp; //在命令提示符号下直接输入telnet&nbsp;</span><a href="http://www.sina.com.cn/"><span style="color: #000000;">www.sina.com.cn</span></a><span style="color: #000000;">&nbsp;80<br>
+&nbsp;&nbsp;&nbsp; HEAD /index.asp HTTP/1.0<br>
+&nbsp;&nbsp;&nbsp; Host:www.sina.com.cn<br>
+&nbsp;</span></p>
+<p><span style="color: #000000;">3 实验结果：</span></p>
+<p><span style="color: #000000;">3.1 请求信息2.1得到的响应是:</span></p>
+<p><span style="color: #000000;">HTTP/1.1 200 OK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //请求成功<br>
+Server: Microsoft-IIS/5.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //web服务器<br>
+Date: Thu,08 Mar 200707:17:51 GMT<br>
+Connection: Keep-Alive&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Content-Length: 23330<br>
+Content-Type: text/html<br>
+Expries: Thu,08 Mar 2007 07:16:51 GMT<br>
+Set-Cookie: ASPSESSIONIDQAQBQQQB=BEJCDGKADEDJKLKKAJEOIMMH; path=/<br>
+Cache-control: private</span></p>
+<p><span style="color: #000000;">//资源内容省略</span></p>
+<p><span style="color: #000000;">3.2 请求信息2.2得到的响应是:</span></p>
+<p><span style="color: #000000;">HTTP/1.0 404 Not Found&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //请求失败<br>
+Date: Thu, 08 Mar 2007 07:50:50 GMT<br>
+Server: Apache/2.0.54 &lt;Unix&gt;<br>
+Last-Modified: Thu, 30 Nov 2006 11:35:41 GMT<br>
+ETag: "6277a-415-e7c76980"<br>
+Accept-Ranges: bytes<br>
+X-Powered-By: mod_xlayout_jh/0.0.1vhs.markII.remix<br>
+Vary: Accept-Encoding<br>
+Content-Type: text/html<br>
+X-Cache: MISS from zjm152-78.sina.com.cn<br>
+Via: 1.0 zjm152-78.sina.com.cn:80&lt;squid/2.6.STABLES-20061207&gt;<br>
+X-Cache: MISS from th-143.sina.com.cn<br>
+Connection: close</span></p>
+<p><br>
+<span style="color: #000000;">失去了跟主机的连接</span></p>
+<p><span style="color: #000000;">按任意键继续...</span></p>
+<p><span style="color: #000000;">4 .注意事项：1、出现输入错误，则请求不会成功。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2、报头域不分大小写。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3、更深一步了解HTTP协议，可以查看RFC2616，在</span><a href="http://www.letf.org/rfc"><span style="color: #000000;">http://www.letf.org/rfc</span></a><span style="color: #000000;">上找到该文件。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4、开发后台程序必须掌握http协议</span></p>
+<p><strong><span style="color: #000000;">六、</span></strong><a href="http://blog.csdn.net/gueter/archive/2007/04/23/1575543.aspx"><span style="color: #000000;"><strong>HTTP协议相关技术补充</strong></span></a></p>
+<p><span style="color: #000000;">&nbsp;&nbsp;&nbsp; 1、基础：<br>
+&nbsp;&nbsp;&nbsp; 高层协议有：文件传输协议FTP、电子邮件传输协议SMTP、域名系统服务DNS、网络新闻传输协议NNTP和HTTP协议等<br>
+中介由三种：代理(Proxy)、网关(Gateway)和通道(Tunnel)，一个代理根据URI的绝对格式来接受请求，重写全部或部分消息，通过 URI的标识把已格式化过的请求发送到服务器。网关是一个接收代理，作为一些其它服务器的上层，并且如果必须的话，可以把请求翻译给下层的服务器协议。一 个通道作为不改变消息的两个连接之间的中继点。当通讯需要通过一个中介(例如：防火墙等)或者是中介不能识别消息的内容时，通道经常被使用。<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 代理(Proxy)：一个中间程序，它可以充当一个服务器，也可以充当一个客户机，为其它客户机建立请求。请求是通过可能的翻译在内部或经过传递到其它的 服务器中。一个代理在发送请求信息之前，必须解释并且如果可能重写它。代理经常作为通过防火墙的客户机端的门户，代理还可以作为一个帮助应用来通过协议处 理没有被用户代理完成的请求。<br>
+网关(Gateway)：一个作为其它服务器中间媒介的服务器。与代理不同的是，网关接受请求就好象对被请求的资源来说它就是源服务器；发出请求的客户机并没有意识到它在同网关打交道。<br>
+网关经常作为通过防火墙的服务器端的门户，网关还可以作为一个协议翻译器以便存取那些存储在非HTTP系统中的资源。<br>
+&nbsp;&nbsp;&nbsp; 通道(Tunnel)：是作为两个连接中继的中介程序。一旦激活，通道便被认为不属于HTTP通讯，尽管通道可能是被一个HTTP请求初始化的。当被中继 的连接两端关闭时，通道便消失。当一个门户(Portal)必须存在或中介(Intermediary)不能解释中继的通讯时通道被经常使用。<br>
+<br>
+2、协议分析的优势—HTTP分析器检测网络攻击<br>
+以模块化的方式对高层协议进行分析处理，将是未来入侵检测的方向。<br>
+HTTP及其代理的常用端口80、3128和8080在network部分用port标签进行了规定<br>
+<br>
+3、HTTP协议Content Lenth限制漏洞导致拒绝服务攻击<br>
+使用POST方法时，可以设置ContentLenth来定义需要传送的数据长度，例如ContentLenth:999999999，在传送完成前，内 存不会释放，攻击者可以利用这个缺陷，连续向WEB服务器发送垃圾数据直至WEB服务器内存耗尽。这种攻击方法基本不会留下痕迹。<br>
+http://www.cnpaf.net/Class/HTTP/0532918532667330.html<br>
+<br>
+4、利用HTTP协议的特性进行拒绝服务攻击的一些构思<br>
+服务器端忙于处理攻击者伪造的TCP连接请求而无暇理睬客户的正常请求（毕竟客户端的正常请求比率非常之小），此时从正常客户的角度看来，服务器失去响应，这种情况我们称作：服务器端受到了SYNFlood攻击（SYN洪水攻击）。<br>
+而Smurf、TearDrop等是利用ICMP报文来Flood和IP碎片攻击的。本文用“正常连接”的方法来产生拒绝服务攻击。<br>
+19端口在早期已经有人用来做Chargen攻击了，即Chargen_Denial_of_Service，但是！他们用的方法是在两台Chargen 服务器之间产生UDP连接，让服务器处理过多信息而DOWN掉，那么，干掉一台WEB服务器的条件就必须有2个：1.有Chargen服务2.有HTTP 服务<br>
+方法：攻击者伪造源IP给N台Chargen发送连接请求（Connect），Chargen接收到连接后就会返回每秒72字节的字符流（实际上根据网络实际情况，这个速度更快）给服务器。<br>
+<br>
+5、Http指纹识别技术<br>
+&nbsp;&nbsp; Http指纹识别的原理大致上也是相同的：记录不同服务器对Http协议执行中的微小差别进行识别.Http指纹识别比TCP/IP堆栈指纹识别复杂许 多,理由是定制Http服务器的配置文件、增加插件或组件使得更改Http的响应信息变的很容易,这样使得识别变的困难；然而定制TCP/IP堆栈的行为 需要对核心层进行修改,所以就容易识别.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 要让服务器返回不同的Banner信息的设置是很简单的,象Apache这样的开放源代码的Http服务器,用户可以在源代码里修改Banner信息,然 后重起Http服务就生效了；对于没有公开源代码的Http服务器比如微软的IIS或者是Netscape,可以在存放Banner信息的Dll文件中修 改,相关的文章有讨论的,这里不再赘述,当然这样的修改的效果还是不错的.另外一种模糊Banner信息的方法是使用插件。<br>
+常用测试请求：<br>
+1：HEAD/Http/1.0发送基本的Http请求<br>
+2：DELETE/Http/1.0发送那些不被允许的请求,比如Delete请求<br>
+3：GET/Http/3.0发送一个非法版本的Http协议请求<br>
+4：GET/JUNK/1.0发送一个不正确规格的Http协议请求<br>
+Http指纹识别工具Httprint,它通过运用统计学原理,组合模糊的逻辑学技术,能很有效的确定Http服务器的类型.它可以被用来收集和分析不同Http服务器产生的签名。<br>
+<br>
+6、其他：为了提高用户使用浏览器时的性能，现代浏览器还支持并发的访问方式，浏览一个网页时同时建立多个连接，以迅速获得一个网页上的多个图标，这样能更快速完成整个网页的传输。<br>
+HTTP1.1中提供了这种持续连接的方式，而下一代HTTP协议：HTTP-NG更增加了有关会话控制、丰富的内容协商等方式的支持，来提供<br>
+更高效率的连接。</span></p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+        <div class="clear"></div>
+        <div id="blog_post_info_block">
+        <div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(1324746,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;83f9460b-63cf-dd11-9e4d-001cf0cd104b&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./test_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./test_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/li0803/" target="_blank"><img src="./test_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/li0803/">Hundre</a><br>
+            <a href="http://home.cnblogs.com/u/li0803/followees">关注 - 3</a><br>
+            <a href="http://home.cnblogs.com/u/li0803/followers">粉丝 - 290</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;83f9460b-63cf-dd11-9e4d-001cf0cd104b&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(1324746,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">122</span>
+    </div>
+    <div class="buryit" onclick="votePost(1324746,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">1</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+        <div class="clear"></div>
+        <div id="post_next_prev"><a href="http://www.cnblogs.com/li0803/archive/2008/11/02/1324750.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/li0803/archive/2008/11/02/1324750.html" title="发布于2008-11-02 21:42">设计模式概述</a><br><a href="http://www.cnblogs.com/li0803/archive/2008/11/04/1324747.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/li0803/archive/2008/11/04/1324747.html" title="发布于2008-11-04 12:35">HTTP协议的头信息详解</a><br></div>
+    </div>
+</div>
+    <ul class="postmetadata">
+        <li class="icon_cat" id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/li0803/category/270301.html">协议详解</a></li>
+        <li class="icon_bullet" id="EntryTag">标签: <a href="http://www.cnblogs.com/li0803/tag/http/">http</a></li>
+    </ul>
+</div>
+<script type="text/javascript">var allowComments=true,cb_blogId=45748,cb_entryId=1324746,cb_blogApp=currentBlogApp,cb_blogUserGuid='83f9460b-63cf-dd11-9e4d-001cf0cd104b',cb_entryCreatedDate='2008/11/3 9:11:00';loadViewCount(cb_entryId);</script>
+<script type="text/javascript">
+    var m = window.__blog.postRendered;
+    if (m) { m(__$("post")); }
+</script>
+<script type="text/javascript">
+    var m = window.__blog.postRenderPosts;
+    if (m) { m(); }
+</script>
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<a class="addcomment" href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#comment_tip">Add your comment</a>
+<h3 id="comments"></h3>
+<div class="feedbackNoItems"></div>
+
+
+<ol class="commentlist" id="commentList">	
+
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#1731683" class="layer">#1楼</a><a name="1731683" id="comment_anchor_1731683"></a></cite> <a id="a_comment_author_1731683" href="http://www.cnblogs.com/piruzhaolu/" target="_blank">Mr JY</a> <a href="http://msg.cnblogs.com/send/Mr%20JY" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2009-12-23 15:54</span></small>
+			</h5>
+			<div id="comment_body_1731683" class="blog_comment_body">感谢负责答辩的老师.在我也不明白所写为何物的情况下,他们只问了我两个问题——都知道写的什么吗？知道；参考文献都看了么？看了.之后便让我通过了答辩.他们是如此和蔼可亲的老师,他们是如此善解人意的老师,他们是如此平易近人而又伟大的老师. <br><br>==================<br>汗。。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(1731683,&#39;Digg&#39;,this)">支持(11)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(1731683,&#39;Bury&#39;,this)">反对(2)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#1789079" class="layer">#2楼</a><a name="1789079" id="comment_anchor_1789079"></a></cite> <a id="a_comment_author_1789079" href="http://www.cnblogs.com/isyd/" target="_blank">Sylvester</a> <a href="http://msg.cnblogs.com/send/Sylvester" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2010-03-29 11:58</span></small>
+			</h5>
+			<div id="comment_body_1789079" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#1731683" title="查看引用原文">引用</a></legend>譬如朝露：<br>感谢负责答辩的老师.在我也不明白所写为何物的情况下,他们只问了我两个问题——都知道写的什么吗？知道；参考文献都看了么？看了.之后便让我通过了答辩.他们是如此和蔼可亲的老师,他们是如此善解人意的老师,他们是如此平易近人而又伟大的老师. <br><br>==================<br>汗。。</fieldset><br>我也汗。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(1789079,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(1789079,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_1789079_avatar" style="display:none;">http://pic.cnblogs.com/face/u102636.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#1860305" class="layer">#3楼</a><a name="1860305" id="comment_anchor_1860305"></a></cite> <a id="a_comment_author_1860305" href="http://home.cnblogs.com/u/137769/" target="_blank">xin_ny</a> <a href="http://msg.cnblogs.com/send/xin_ny" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2010-06-29 19:09</span></small>
+			</h5>
+			<div id="comment_body_1860305" class="blog_comment_body">学习了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(1860305,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(1860305,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2078395" class="layer">#4楼</a><a name="2078395" id="comment_anchor_2078395"></a></cite> <a id="a_comment_author_2078395" href="http://home.cnblogs.com/u/265894/" target="_blank">invado</a> <a href="http://msg.cnblogs.com/send/invado" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2011-04-23 12:25</span></small>
+			</h5>
+			<div id="comment_body_2078395" class="blog_comment_body">这样的一篇论文就能通过答辩？高中的吧。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2078395,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2078395,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2308033" class="layer">#5楼</a><a name="2308033" id="comment_anchor_2308033"></a></cite> <a id="a_comment_author_2308033" href="http://www.cnblogs.com/poissonnotes/" target="_blank">poisson_notes</a> <a href="http://msg.cnblogs.com/send/poisson_notes" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-02-14 09:33</span></small>
+			</h5>
+			<div id="comment_body_2308033" class="blog_comment_body"><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#1731683" title="查看引用原文">引用</a></legend><br>感谢负责答辩的老师.在我也不明白所写为何物的情况下,他们只问了我两个问题——都知道写的什么吗？知道；参考文献都看了么？看了.之后便让我通过了答辩.他们是如此和蔼可亲的老师,他们是如此善解人意的老师,他们是如此平易近人而又伟大的老师. <br><br></fieldset><br><br>这个。。。是反讽吗？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2308033,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2308033,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2308033_avatar" style="display:none;">http://pic.cnblogs.com/face/u112695.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2352664" class="layer">#6楼</a><a name="2352664" id="comment_anchor_2352664"></a></cite> <a id="a_comment_author_2352664" href="http://www.cnblogs.com/fiteg/" target="_blank">风筝blog</a> <a href="http://msg.cnblogs.com/send/%E9%A3%8E%E7%AD%9Dblog" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-04-11 17:01</span></small>
+			</h5>
+			<div id="comment_body_2352664" class="blog_comment_body">如果我的答辩也是如此就好了。。。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2352664,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2352664,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2352664_avatar" style="display:none;">http://pic.cnblogs.com/face/u358338.jpg?id=01170948</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2436855" class="layer">#7楼</a><a name="2436855" id="comment_anchor_2436855"></a></cite> <a id="a_comment_author_2436855" href="http://www.cnblogs.com/tt-0411/" target="_blank">tt-0411</a> <a href="http://msg.cnblogs.com/send/tt-0411" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-07-29 10:45</span></small>
+			</h5>
+			<div id="comment_body_2436855" class="blog_comment_body">请问 http 报文的最大长度是多少？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2436855,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2436855,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2436855_avatar" style="display:none;">http://pic.cnblogs.com/face/u345625.jpg?id=09151443</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2487804" class="layer">#8楼</a><a name="2487804" id="comment_anchor_2487804"></a></cite> <a id="a_comment_author_2487804" href="http://www.cnblogs.com/UnGeek/" target="_blank">UnGeek</a> <a href="http://msg.cnblogs.com/send/UnGeek" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-10-07 15:15</span></small>
+			</h5>
+			<div id="comment_body_2487804" class="blog_comment_body">guet呢，桂电主页呀</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2487804,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2487804,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2487804_avatar" style="display:none;">http://pic.cnblogs.com/face/401225/20130124183050.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2490695" class="layer">#9楼</a><a name="2490695" id="comment_anchor_2490695"></a></cite> <a id="a_comment_author_2490695" href="http://www.cnblogs.com/likebeta/" target="_blank">likebeta</a> <a href="http://msg.cnblogs.com/send/likebeta" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-10-11 10:46</span></small>
+			</h5>
+			<div id="comment_body_2490695" class="blog_comment_body">答辩被问了半个小时</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2490695,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2490695,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2490695_avatar" style="display:none;">http://pic.cnblogs.com/face/168241/20131208181538.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2491474" class="layer">#10楼</a><a name="2491474" id="comment_anchor_2491474"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2491474" href="http://www.cnblogs.com/li0803/" target="_blank">Hundre</a> <a href="http://msg.cnblogs.com/send/Hundre" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-10-12 09:03</span></small>
+			</h5>
+			<div id="comment_body_2491474" class="blog_comment_body"><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2490695" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2490695);">@</a>
+likebeta<br>呵呵，要么是带你的老师势力不够，压不住其他老师，要么就是你老师太敬业了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2491474,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2491474,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2491526" class="layer">#11楼</a><a name="2491526" id="comment_anchor_2491526"></a></cite> <a id="a_comment_author_2491526" href="http://www.cnblogs.com/likebeta/" target="_blank">likebeta</a> <a href="http://msg.cnblogs.com/send/likebeta" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-10-12 09:36</span></small>
+			</h5>
+			<div id="comment_body_2491526" class="blog_comment_body"><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2491474" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2491474);">@</a>
+Hundre<br>这个真心是压不住场, 全部答辩只有跟着我们老师的两个受这种待遇</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2491526,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2491526,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2491526_avatar" style="display:none;">http://pic.cnblogs.com/face/168241/20131208181538.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2495046" class="layer">#12楼</a><a name="2495046" id="comment_anchor_2495046"></a></cite> <a id="a_comment_author_2495046" href="http://home.cnblogs.com/u/82580/" target="_blank">anywhere</a> <a href="http://msg.cnblogs.com/send/anywhere" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2012-10-17 15:06</span></small>
+			</h5>
+			<div id="comment_body_2495046" class="blog_comment_body">网络靃</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2495046,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2495046,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2624963" class="layer">#13楼</a><a name="2624963" id="comment_anchor_2624963"></a></cite> <a id="a_comment_author_2624963" href="http://www.cnblogs.com/itleeblog/" target="_blank">林枫705-</a> <a href="http://msg.cnblogs.com/send/%E6%9E%97%E6%9E%AB705-" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-02-28 11:30</span></small>
+			</h5>
+			<div id="comment_body_2624963" class="blog_comment_body">看的有点晕！<a href="http://www.cnblogs.com/li0803/archive/2008/11/03/null" target="_blank">http://www.itlee.name</a></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2624963,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2624963,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2624963_avatar" style="display:none;">http://pic.cnblogs.com/face/495257/20130204133255.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2651275" class="layer">#14楼</a><a name="2651275" id="comment_anchor_2651275"></a></cite> <a id="a_comment_author_2651275" href="http://home.cnblogs.com/u/72350/" target="_blank">乔 </a> <a href="http://msg.cnblogs.com/send/%E4%B9%94%20" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-04-07 17:21</span></small>
+			</h5>
+			<div id="comment_body_2651275" class="blog_comment_body">看不到</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2651275,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2651275,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2725607" class="layer">#15楼</a><a name="2725607" id="comment_anchor_2725607"></a></cite> <a id="a_comment_author_2725607" href="http://home.cnblogs.com/u/547259/" target="_blank">古字的人生</a> <a href="http://msg.cnblogs.com/send/%E5%8F%A4%E5%AD%97%E7%9A%84%E4%BA%BA%E7%94%9F" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-07-12 10:13</span></small>
+			</h5>
+			<div id="comment_body_2725607" class="blog_comment_body">为了顶师兄。。果断的注册了博客yuan。。。三院的师兄？哪个老师这么牛叉，，或者你又黑我大桂电了。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2725607,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2725607,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2725621" class="layer">#16楼</a><a name="2725621" id="comment_anchor_2725621"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2725621" href="http://www.cnblogs.com/li0803/" target="_blank">Hundre</a> <a href="http://msg.cnblogs.com/send/Hundre" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-07-12 10:21</span></small>
+			</h5>
+			<div id="comment_body_2725621" class="blog_comment_body"><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2725607" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2725607);">@</a>
+古字的人生<br>额，这位兄弟，你应该是认错人了，但是导师们倒有可能是同门的</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2725621,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2725621,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2725627" class="layer">#17楼</a><a name="2725627" id="comment_anchor_2725627"></a></cite> <a id="a_comment_author_2725627" href="http://home.cnblogs.com/u/547259/" target="_blank">古字的人生</a> <a href="http://msg.cnblogs.com/send/%E5%8F%A4%E5%AD%97%E7%9A%84%E4%BA%BA%E7%94%9F" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-07-12 10:28</span></small>
+			</h5>
+			<div id="comment_body_2725627" class="blog_comment_body"><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2725621" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2725621);">@</a>
+Hundre<br>　　0.0好吧。。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2725627,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2725627,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2764894" class="layer">#18楼</a><a name="2764894" id="comment_anchor_2764894"></a></cite> <a id="a_comment_author_2764894" href="http://www.cnblogs.com/vsgoster/" target="_blank">千叶忆夕阳</a> <a href="http://msg.cnblogs.com/send/%E5%8D%83%E5%8F%B6%E5%BF%86%E5%A4%95%E9%98%B3" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-08-30 18:23</span></small>
+			</h5>
+			<div id="comment_body_2764894" class="blog_comment_body">写的不错，学习了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2764894,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2764894,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2764894_avatar" style="display:none;">http://pic.cnblogs.com/face/421404/20160621114412.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2807886" class="layer">#19楼</a><a name="2807886" id="comment_anchor_2807886"></a></cite> <a id="a_comment_author_2807886" href="http://www.cnblogs.com/xiongge/" target="_blank">elroyzhang</a> <a href="http://msg.cnblogs.com/send/elroyzhang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-11-02 13:49</span></small>
+			</h5>
+			<div id="comment_body_2807886" class="blog_comment_body">请问现在telnet 这个能用吗？ 我开启服务，能连接到本机，却不能连接到，网站</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2807886,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2807886,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2807886_avatar" style="display:none;">http://pic.cnblogs.com/face/533416/20130528170815.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2808027" class="layer">#20楼</a><a name="2808027" id="comment_anchor_2808027"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2808027" href="http://www.cnblogs.com/li0803/" target="_blank">Hundre</a> <a href="http://msg.cnblogs.com/send/Hundre" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-11-02 21:01</span></small>
+			</h5>
+			<div id="comment_body_2808027" class="blog_comment_body"><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2807886" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2807886);">@</a>
+Evan linux<br>没明白你的问题</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2808027,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2808027,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2836504" class="layer">#21楼</a><a name="2836504" id="comment_anchor_2836504"></a></cite> <a id="a_comment_author_2836504" href="http://www.cnblogs.com/xuedong09/" target="_blank">xuedong09</a> <a href="http://msg.cnblogs.com/send/xuedong09" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-12-13 11:20</span></small>
+			</h5>
+			<div id="comment_body_2836504" class="blog_comment_body">学习了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2836504,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2836504,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2839651" class="layer">#22楼</a><a name="2839651" id="comment_anchor_2839651"></a></cite> <a id="a_comment_author_2839651" href="http://www.cnblogs.com/kangs/" target="_blank">yis</a> <a href="http://msg.cnblogs.com/send/yis" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-12-18 11:23</span></small>
+			</h5>
+			<div id="comment_body_2839651" class="blog_comment_body">“2.1 open www.guet.edu.cn 80  //注意端口号不能省略<br><br>    HEAD /index.asp HTTP/1.0<br>     Host:www.guet.edu.cn”<br>这段在控制台怎么输入？“open www.guet.edu.cn 80 ”后要输入一个空行？在控制台按enter后就直接执行了呀。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2839651,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2839651,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2839779" class="layer">#23楼</a><a name="2839779" id="comment_anchor_2839779"></a>[<span class="louzhu">楼主</span>]</cite> <a id="a_comment_author_2839779" href="http://www.cnblogs.com/li0803/" target="_blank">Hundre</a> <a href="http://msg.cnblogs.com/send/Hundre" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2013-12-18 13:42</span></small>
+			</h5>
+			<div id="comment_body_2839779" class="blog_comment_body"><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2839651" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2839651);">@</a>
+yis<br>如果是加端口号的话，我觉得应该是这样“open www.guet.edu.cn:80”<br>端口和地址之间用":"连接</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2839779,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2839779,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2858270" class="layer">#24楼</a><a name="2858270" id="comment_anchor_2858270"></a></cite> <a id="a_comment_author_2858270" href="http://www.cnblogs.com/w3cschool/" target="_blank">fkblog.org</a> <a href="http://msg.cnblogs.com/send/fkblog.org" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-01-10 16:16</span></small>
+			</h5>
+			<div id="comment_body_2858270" class="blog_comment_body">收藏，最近入门web，先了解HTTP，这边的文章页不错<a href="http://www.w3cschool.cc/http/http-tutorial.html" target="_blank">http://www.w3cschool.cc/http/http-tutorial.html</a></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2858270,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2858270,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2941770" class="layer">#25楼</a><a name="2941770" id="comment_anchor_2941770"></a></cite> <a id="a_comment_author_2941770" href="http://www.cnblogs.com/3gods/" target="_blank">attackCityMaster</a> <a href="http://msg.cnblogs.com/send/attackCityMaster" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-05-19 13:57</span></small>
+			</h5>
+			<div id="comment_body_2941770" class="blog_comment_body">真的是太详细了，要是在讲讲原理的就更好了。<a href="http://3gods.com/" target="_blank">http://3gods.com</a></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2941770,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2941770,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_2941770_avatar" style="display:none;">http://pic.cnblogs.com/face/553468/20150616171806.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2974576" class="layer">#26楼</a><a name="2974576" id="comment_anchor_2974576"></a></cite> <a id="a_comment_author_2974576" href="http://home.cnblogs.com/u/646802/" target="_blank">triunityduke</a> <a href="http://msg.cnblogs.com/send/triunityduke" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-06-30 21:14</span></small>
+			</h5>
+			<div id="comment_body_2974576" class="blog_comment_body">08年桂电毕业，那是前辈啊。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2974576,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2974576,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3051902" class="layer">#27楼</a><a name="3051902" id="comment_anchor_3051902"></a></cite> <a id="a_comment_author_3051902" href="http://www.cnblogs.com/wangfupeng1988/" target="_blank">王福朋</a> <a href="http://msg.cnblogs.com/send/%E7%8E%8B%E7%A6%8F%E6%9C%8B" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-10-27 16:16</span></small>
+			</h5>
+			<div id="comment_body_3051902" class="blog_comment_body"><fieldset class="comment_quote"><legend>引用</legend>感谢负责答辩的老师.在我也不明白所写为何物的情况下,他们只问了我两个问题——都知道写的什么吗？知道；参考文献都看了么？看了.之后便让我通过了答辩.他们是如此和蔼可亲的老师,他们是如此善解人意的老师,他们是如此平易近人而又伟大的老师.</fieldset>哈哈，说得好</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3051902,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3051902,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_3051902_avatar" style="display:none;">http://pic.cnblogs.com/face/138012/20140923142153.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3094626" class="layer">#28楼</a><a name="3094626" id="comment_anchor_3094626"></a></cite> <a id="a_comment_author_3094626" href="http://www.cnblogs.com/ch-10/" target="_blank">Automation</a> <a href="http://msg.cnblogs.com/send/Automation" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-12-26 20:02</span></small>
+			</h5>
+			<div id="comment_body_3094626" class="blog_comment_body">讲得不错，正要学习</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3094626,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3094626,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_3094626_avatar" style="display:none;">http://pic.cnblogs.com/face/504947/20130315220832.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3097890" class="layer">#29楼</a><a name="3097890" id="comment_anchor_3097890"></a></cite> <a id="a_comment_author_3097890" href="http://www.cnblogs.com/champ/" target="_blank">Champ_Keh</a> <a href="http://msg.cnblogs.com/send/Champ_Keh" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2014-12-31 20:54</span></small>
+			</h5>
+			<div id="comment_body_3097890" class="blog_comment_body">非常不错！<br>最近正在练习使用burp suite，配合您这篇文章来理解Request/Response很赞。<br>不过第六部分看的有点晕</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3097890,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3097890,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_3097890_avatar" style="display:none;">http://pic.cnblogs.com/face/574227/20131014172714.png</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3257203" class="layer">#30楼</a><a name="3257203" id="comment_anchor_3257203"></a></cite> <a id="a_comment_author_3257203" href="http://www.cnblogs.com/yanhuiw/" target="_blank">程序创造世界</a> <a href="http://msg.cnblogs.com/send/%E7%A8%8B%E5%BA%8F%E5%88%9B%E9%80%A0%E4%B8%96%E7%95%8C" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2015-08-30 23:10</span></small>
+			</h5>
+			<div id="comment_body_3257203" class="blog_comment_body"><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#2858270" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2858270);">@</a>
+fkblog.org<br>这个推荐不错</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3257203,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3257203,&#39;Bury&#39;,this)">反对(1)</a></div><span id="comment_3257203_avatar" style="display:none;">http://pic.cnblogs.com/face/u49785.jpg</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3265789" class="layer">#31楼</a><a name="3265789" id="comment_anchor_3265789"></a></cite> <a id="a_comment_author_3265789" href="http://home.cnblogs.com/u/810599/" target="_blank">智慧安卓</a> <a href="http://msg.cnblogs.com/send/%E6%99%BA%E6%85%A7%E5%AE%89%E5%8D%93" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2015-09-13 15:06</span></small>
+			</h5>
+			<div id="comment_body_3265789" class="blog_comment_body">太官方了，看不太懂</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3265789,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3265789,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3368964" class="layer">#32楼</a><a name="3368964" id="comment_anchor_3368964"></a></cite> <a id="a_comment_author_3368964" href="http://home.cnblogs.com/u/370977/" target="_blank">wuchengzhou</a> <a href="http://msg.cnblogs.com/send/wuchengzhou" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2016-02-29 21:35</span></small>
+			</h5>
+			<div id="comment_body_3368964" class="blog_comment_body">很详细的教程</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3368964,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3368964,&#39;Bury&#39;,this)">反对(1)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3473215" class="layer">#33楼</a><a name="3473215" id="comment_anchor_3473215"></a></cite> <a id="a_comment_author_3473215" href="http://home.cnblogs.com/u/689766/" target="_blank">luhui1hao</a> <a href="http://msg.cnblogs.com/send/luhui1hao" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2016-07-20 11:36</span></small>
+			</h5>
+			<div id="comment_body_3473215" class="blog_comment_body">相比之下，我感觉这一篇写的更好，更清晰易懂<br><a href="http://kb.cnblogs.com/page/130970/" target="_blank">http://kb.cnblogs.com/page/130970/</a></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3473215,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3473215,&#39;Bury&#39;,this)">反对(0)</a></div>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+		<li class="alt">
+			<h5>
+				<cite><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3493540" class="layer">#34楼</a><a name="3493540" id="comment_anchor_3493540"></a><span id="comment-maxId" style="display:none;">3493540</span><span id="comment-maxDate" style="display:none;">2016/8/22 8:52:41</span></cite> <a id="a_comment_author_3493540" href="http://www.cnblogs.com/iamlilinfeng/" target="_blank">李林峰的园子</a> <a href="http://msg.cnblogs.com/send/%E6%9D%8E%E6%9E%97%E5%B3%B0%E7%9A%84%E5%9B%AD%E5%AD%90" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><small> <span class="comment_date">2016-08-22 08:52</span></small>
+			</h5>
+			<div id="comment_body_3493540" class="blog_comment_body"><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3473215" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3473215);">@</a>
+luhui1hao<br>这个更通俗。<br><a href="http://mp.weixin.qq.com/s?__biz" target="_blank">http://mp.weixin.qq.com/s?__biz</a>=MjM5MDY5MTM4Nw==&amp;mid=2449647984&amp;idx=1&amp;sn=9a64fbf7453232714bf286b83b188207&amp;scene=0#wechat_redirect</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3493540,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3493540,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3493540_avatar" style="display:none;">http://pic.cnblogs.com/face/u414533.gif?id=31160526</span>
+			<div class="opt_comment"><span class="comment_actions"></span></div>
+		</li>
+	
+</ol>
+
+<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block"></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/551924/" target="_blank">“墨子号”正进行卫星平台测试工作 多个国家请求开展国际合作</a><br> ·  <a href="http://news.cnblogs.com/n/551922/" target="_blank">苹果零售店更名“苹果”被指怪异 违背常识令人混淆</a><br> ·  <a href="http://news.cnblogs.com/n/551921/" target="_blank">韵达拟177亿借壳新海股份，成第四家借壳上市快递公司</a><br> ·  <a href="http://news.cnblogs.com/n/551923/" target="_blank">苹果汽车计划调整：重点开发自动驾驶 电动车地位下降</a><br> ·  <a href="http://news.cnblogs.com/n/551920/" target="_blank">Lyft报价90亿美元求收购 Uber称其顶多值20亿美元</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/550625/" target="_blank">程序猿媳妇儿注意事项</a><br> ·  <a href="http://kb.cnblogs.com/page/540529/" target="_blank">可是姑娘，你为什么要编程呢？</a><br> ·  <a href="http://kb.cnblogs.com/page/549631/" target="_blank">知其所以然（以算法学习为例）</a><br> ·  <a href="http://kb.cnblogs.com/page/548394/" target="_blank">如何给变量取个简短且无歧义的名字</a><br> ·  <a href="http://kb.cnblogs.com/page/549080/" target="_blank">编程的智慧</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+$(function () {
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);    
+});
+</script>
+</div>
+
+
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.contentRendered;
+            if (m) { m(__$("content")); }
+        </script>
+
+        <div id="sidebar">
+            
+<div id="about">
+<div>
+<h2 id="about_title">About</h2>
+<div id="about_body">
+<div id="blog-news"><div>
+
+
+
+</div>
+
+<a href="http://www.cnzz.com/stat/website.php?web_id=1684828" target="_blank" title="站长统计"><img border="0" hspace="0" vspace="0" src="./test_files/pic.gif"></a><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/li0803/">Hundre</a><br>园龄：<a href="http://home.cnblogs.com/u/li0803/" title="入园时间：2008-10-17">7年10个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/li0803/followers/">290</a><br>关注：<a href="http://home.cnblogs.com/u/li0803/followees/">3</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;83f9460b-63cf-dd11-9e4d-001cf0cd104b&#39;)">+加关注</a></div></div></div>
+<script type="text/javascript">loadBlogNews();</script>
+</div>
+</div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.aboutRendered;
+                if (m) { m(__$("about")); }
+            </script>
+            
+<div id="mySearchWrapper">
+    <div id="mySearch">
+        <input type="image" src="./test_files/btnsearch.gif" id="btnZzk" class="submit" onclick="zzk_go();return false;">
+        <label class="lb_search"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="keyword"></label>
+    </div>
+</div>
+
+            <script type="text/javascript">
+                var m = window.__blog.searchFormRendered;
+                if (m) { m(__$("searchform")); }
+            </script>
+            <div id="sideMain">
+            <div id="side-recent-comments">
+        <h2>最新评论</h2>
+        <ul class="voice">
+                <li>
+                    <a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3493540">Re:HTTP协议详解（真的很经典）</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3493540">
+                        @luhui1hao
+这个更通俗。
+
+                        -- 李林峰的园子
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3473215">Re:HTTP协议详解（真的很经典）</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3473215">
+                        相比之下，我感觉这一篇写的更好，更清晰易懂
+
+                        -- luhui1hao
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/li0803/archive/2008/11/14/1333377.html#3461467">Re:Finalize,Dispose,SuppressFinalize</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/li0803/archive/2008/11/14/1333377.html#3461467">
+                        @极度嚣张12345
+非托管资源由终结器线程执行Finalize()清理。
+                        -- Tim Lee
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3368964">Re:HTTP协议详解（真的很经典）</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html#3368964">
+                        很详细的教程
+                        -- wuchengzhou
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.cnblogs.com/li0803/archive/2010/11/16/1878833.html#3366969">Re:FTP协议详解</a>
+                    <br>
+                    <a class="child" href="http://www.cnblogs.com/li0803/archive/2010/11/16/1878833.html#3366969">
+                        看完 知道ftp的原理了 感谢
+                        -- Lemon_乐
+                    </a>
+                </li>
+        </ul>
+    </div></div>
+            <div id="sideRight">
+                
+    
+
+
+</div>
+            <div id="sideLeft">
+            <div id="side-categories">
+        <h2>随笔分类</h2>
+        <ul class="folder">
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/li0803/category/405756.html">C#-Gameboy模拟器开发(7)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/li0803/category/282015.html">C#开源操作系统(10)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/li0803/category/813813.html">Unity3D(1)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/li0803/category/160838.html">成长的烦恼(15)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/li0803/category/270640.html">文件格式(4)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/li0803/category/158723.html">我错了(6)</a>
+                </li>
+                <li>
+                    
+                    <a href="http://www.cnblogs.com/li0803/category/270301.html">协议详解(4)</a>
+                </li>
+        </ul>
+    </div><div id="side-top-posts-custom">
+    <h2>推荐排行榜</h2>
+    <div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html">1. HTTP协议详解（真的很经典）(122)</a></li><li><a href="http://www.cnblogs.com/li0803/archive/2009/09/20/1570581.html">2. 雅虎网站页面性能优化的34条黄金守则(8)</a></li><li><a href="http://www.cnblogs.com/li0803/archive/2011/02/23/1962093.html">3. Cosmos的基石：IL2CPU编译器--.net/C#开源操作系统学习系列三(6)</a></li><li><a href="http://www.cnblogs.com/li0803/archive/2010/11/16/1878833.html">4. FTP协议详解(4)</a></li><li><a href="http://www.cnblogs.com/li0803/archive/2011/01/31/1948215.html">5. Cosmos开篇、本系列目录--.net/C#开源操作系统学习系列一(3)</a></li></ul></div>
+</div><div id="side-top-posts">
+    <h2>阅读排行榜</h2>
+    <div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html">1. HTTP协议详解（真的很经典）(743598)</a></li><li><a href="http://www.cnblogs.com/li0803/archive/2009/08/22/1552094.html">2. ie6,ie7兼容性总结(42644)</a></li><li><a href="http://www.cnblogs.com/li0803/archive/2009/09/20/1570581.html">3. 雅虎网站页面性能优化的34条黄金守则(36293)</a></li><li><a href="http://www.cnblogs.com/li0803/archive/2010/11/16/1878833.html">4. FTP协议详解(29942)</a></li><li><a href="http://www.cnblogs.com/li0803/archive/2010/11/20/1882792.html">5. rtp协议详解/rtcp协议详解(28036)</a></li></ul></div>
+</div></div>
+            
+                <div id="sideContainer"></div>
+                <script type="text/javascript">
+                    $.ajax({
+                        url: '/' + currentBlogApp + '/mvc/blog/Minyx2_Lite_SideColumn.aspx',
+                        data: '{}',
+                        type: 'post',
+                        dataType: 'text',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            if (data) {
+                                $("#sideContainer").html(data);
+                                loadBlogDefaultCalendar();
+                                loadBlogSideBlocks();
+                                var m = window.__blog.sideContainerRendered;
+                                if (m) { m(__$("sideContainer")); }
+                                window.__blog.sidebar.__layout();
+                            }
+                        }
+                    });
+
+                </script>
+            
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.sidebarRendered;
+            if (m) { m(__$("sidebar")); }
+        </script>
+
+        <div id="footer">
+            
+<p id="logoFoot">
+    <a href="http://www.spiga.com.mx/" title="Agencia Interactiva Spiga">www.spiga.com.mx</a>
+</p>
+<div class="footText">
+<p>
+Copyright ©2016 Hundre
+</p>
+<p>
+<a href="http://www.cnblogs.com/">博客园</a>
+</p>
+</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.wrapperRendered;
+        if (m) { m(__$("wrapper")); }
+    </script>
+
+</div>
+<script type="text/javascript">
+    var m = window.__blog.containerRendered;
+    if (m) { m(__$("container")); }
+</script>
+
+
+</body></html>
