@@ -124,7 +124,7 @@ int RegularFileExec(int iClient, char *strPath, struct RequestHeader *ptReqHeade
     tFileDesc.pucMem   = pucMemStart;
 
     ptFormatMrg = GetSupportedFormatMgr(&tFileDesc);
-    ptFormatMrg->WriteToClient(iClient, &tFileDesc);
+    ptFormatMrg->WriteToClient(iClient, &tFileDesc, ptReqHeader);
 
     munmap(pucMemStart, tFStat.st_size);
     close(iFd);

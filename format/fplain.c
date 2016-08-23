@@ -10,7 +10,7 @@
 #include <sys/socket.h>
 
 static int isSupportPlain(struct FileDesc *ptFileDesc);
-static int PlainWriteToClient(int iClient, struct FileDesc *ptFileDesc);
+static int PlainWriteToClient(int iClient, struct FileDesc *ptFileDesc, struct RequestHeader *ptReqHeader);
 //static int PlainReadFromClient(int iClient, char *strPath);
 
 #define SEND_BUFF_LEN 512
@@ -28,7 +28,7 @@ static int isSupportPlain(struct FileDesc *ptFileDesc)
     return 1;
 }
 
-static int PlainWriteToClient(int iClient, struct FileDesc *ptFileDesc)
+static int PlainWriteToClient(int iClient, struct FileDesc *ptFileDesc, struct RequestHeader *ptReqHeader)
 {
     unsigned char *pucMemStart = ptFileDesc->pucMem;
     unsigned char *pucMem;

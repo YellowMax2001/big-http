@@ -89,6 +89,7 @@ static void SetEnv(struct RequestHeader *ptReqHeader)
 {
     char strArgs[1024] = "\0";
     char strMethod[256] = "\0";
+    char strContType[256] = "\0";
 
     /* 参数 */
     if(!strcmp(ptReqHeader->strMethod, "GET")){
@@ -96,8 +97,13 @@ static void SetEnv(struct RequestHeader *ptReqHeader)
         strArgs[255] = '\0';
         putenv(strArgs);
     }else if(!strcmp(ptReqHeader->strMethod, "POST")){
-        snprintf(strArgs, 1024, "QUERY_STRING=%s", ptReqHeader->strPostArgs);
-        strArgs[1023] = '\0';
+        /* 重要，这个参数要给 cgi 程序使用，以获得传进来的参数 */
+        snprintf(strContType, 256, "CONTENT_TYPE=%s", ptReqHeader->strContType);
+        strContType[255] = '\0';
+        putenv(strContType);
+
+        snprintf(strArgs, 256, "CONTENT_LENGTH=%d", ptReqHeader->iContLen);
+        strArgs[255] = '\0';
         putenv(strArgs);
     }
 
@@ -105,6 +111,75 @@ static void SetEnv(struct RequestHeader *ptReqHeader)
     snprintf(strMethod, 255, "REQUEST_METHOD=%s", ptReqHeader->strMethod);
     strMethod[255] = '\0';
     putenv(strMethod);
+}
+
+int GetRequestHeader(int iSockFd, struct RequestHeader *ptReqHeader)
+{
+    int iRecvNum = 0;
+    char strBuf[1024];
+	char strTmp[4][256];
+	int iPostArgLen = 0;
+    char *strIndex;
+
+    memset(strBuf, 0, sizeof(strBuf));
+    memset(strTmp, 0, sizeof(strTmp[0]) * 4);
+
+    /* 首先获取第一行，第一行总是包含了请求方法，url 以及 http 版本号 */
+    iRecvNum = GetLineFromSock(iSockFd, strBuf, sizeof(strBuf));
+    if(-1 == iRecvNum){
+        DebugPrint("GetRequestHeader::GetLineFromSock\n");
+        return -1;
+    }
+    /* 按空格分割字符 */
+    GetNonSpaceBlock(strTmp, strBuf, sizeof(strTmp[0]));
+
+    memcpy(ptReqHeader->strMethod, strTmp[0], sizeof(strTmp[0]));
+    memcpy(ptReqHeader->strURL, strTmp[1], sizeof(strTmp[0]));
+    memcpy(ptReqHeader->strVersion, strTmp[2], sizeof(strTmp[0]));
+
+    /* 请求头部总是以一个新行作为结束 */
+    while(strBuf[0] != '\n'){
+        iRecvNum = GetLineFromSock(iSockFd, strBuf, sizeof(strBuf));
+        if(-1 == iRecvNum){
+            perror("GetRequestHeader::GetLineFromSock");
+            return -1;
+        }
+
+        if(!strncasecmp("Content-Length:", strBuf, 15)){
+            GetNonSpaceBlock(strTmp, strBuf, sizeof(strTmp[0]));
+            iPostArgLen = atoi(strTmp[1]);
+            DebugPrint("Content-Length = %d\n", iPostArgLen);
+        }
+
+        if(!strncasecmp("Content-Type:", strBuf, 13)){
+            strIndex = strrchr(strBuf, ':');
+            if(strIndex){
+                strIndex += 2;   /* 跳过 ": " */
+                memcpy(ptReqHeader->strContType, strIndex, sizeof(ptReqHeader->strContType));
+            }
+            DebugPrint("Content-Type = %s\n", ptReqHeader->strContType);
+        }
+    }
+
+    ptReqHeader->strPostArgs = malloc(iPostArgLen);    /* 分配空间 */
+    if(NULL == ptReqHeader->strPostArgs){
+        perror("GetRequestHeader::malloc");
+        return -1;
+    }
+    memset(ptReqHeader->strPostArgs, 0, iPostArgLen);  /* 清空 */
+    ptReqHeader->iContLen = iPostArgLen;
+
+	if(iPostArgLen){
+        iRecvNum = GetBytesFromSock(iSockFd, ptReqHeader->strPostArgs, iPostArgLen);
+        if(-1 == iRecvNum){
+            perror("GetRequestHeader::GetLineFromSock");
+            return -1;
+        }
+    }
+
+    DebugPrint("strPostArgs = %s \n", ptReqHeader->strPostArgs);
+
+    return 0;
 }
 
 int PutResponseHeader(int iSockFd, struct RequestHeader *ptReqHeader)
@@ -144,6 +219,9 @@ int PutResponseHeader(int iSockFd, struct RequestHeader *ptReqHeader)
 
     SetEnv(ptReqHeader);    /* 设置环境变量 */
     RegularFileExec(iSockFd, strPath, ptReqHeader);
+
+    free(ptReqHeader->strPostArgs);
+    ptReqHeader->strPostArgs = NULL;
 
     DebugPrint("QUERY_STRING = %s \n", getenv("QUERY_STRING"));
     DebugPrint("REQUEST_METHOD = %s \n", getenv("REQUEST_METHOD"));

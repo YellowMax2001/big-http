@@ -10,7 +10,7 @@
 #include <sys/socket.h>
 
 static int isSupportHtml(struct FileDesc *ptFileDesc);
-static int HtmlWriteToClient(int iClient, struct FileDesc *ptFileDesc);
+static int HtmlWriteToClient(int iClient, struct FileDesc *ptFileDesc, struct RequestHeader *ptReqHeader);
 //static int HtmlReadFromClient(int iClient, char *strPath);
 
 #define SEND_BUFF_LEN 512
@@ -52,7 +52,7 @@ static int isSupportHtml(struct FileDesc *ptFileDesc)
     return 0;
 }
 
-static int HtmlWriteToClient(int iClient, struct FileDesc *ptFileDesc)
+static int HtmlWriteToClient(int iClient, struct FileDesc *ptFileDesc, struct RequestHeader *ptReqHeader)
 {
     unsigned char *pucMemStart = ptFileDesc->pucMem;
     unsigned char *pucMem;

@@ -1,0 +1,34 @@
+
+<HTML>
+<HEAD>
+<meta name="renderer" content="webkit" /><!--让360默认以极速方式渲染-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/><!--使用最新的文档模式，所以默认在IE9下是quirks模式，太难看-->
+<link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    div {width:630px;text-align:center;background:#e9e5e5;margin:0 auto}
+</style>
+
+<TITLE>file upload</TITLE>
+</HEAD>
+<BODY style="background:#e6e6d0">
+    <br />
+    <br />
+    <br />
+    <div class="text">
+        <form action="main.cgi" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="action_id" value="file_addnew"/>
+            <input type="hidden" name="edit_id" value="<TMPL_VAR name='edit_id' />">
+            <table cellpadding="10">
+                <tr>
+                    <td colspan="1"><a href="cgi-test.cgi?file_flush"><input type="button" class="btn btn-success" style="width:100px;height:40px;font-size:20px;" value="刷新列表" name="btn_flush"/></a></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                    <input type="submit" class="btn btn-success" style="width:70px;height:40px;font-size:20px;" value="上传" name="btn_upload"/></td>
+                    <td colspan="3"><input type="file" class="btn btn-success" name="file_upload" style="width:280px;height:40px;font-size:20px;"/></td>
+                </tr>
+        </form>
+    </div>
+
+</BODY>
+</HTML>

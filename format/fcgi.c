@@ -12,7 +12,7 @@
 #include <sys/wait.h>
 
 static int isSupportCgi(struct FileDesc *ptFileDesc);
-static int CgiWriteToClient(int iClient, struct FileDesc *ptFileDesc);
+static int CgiWriteToClient(int iClient, struct FileDesc *ptFileDesc, struct RequestHeader *ptReqHeader);
 //static int CgiReadFromClient(int iClient, char *strPath);
 
 #define STDOUT 1
@@ -45,12 +45,15 @@ static int isSupportCgi(struct FileDesc *ptFileDesc)
     return 0;
 }
 
-static int CgiWriteToClient(int iClient, struct FileDesc *ptFileDesc)
+static int CgiWriteToClient(int iClient, struct FileDesc *ptFileDesc, struct RequestHeader *ptReqHeader)
 {
 	int iCgiOutFd[2];
 	int iCgiInFd[2];
     pid_t ForkPid;
     char cByte = '\0';
+    fd_set WriteSet;
+    char *strTmp;
+    int i = 0;
 
     munmap(ptFileDesc->pucMem, ptFileDesc->tFStat.st_size);
     close(ptFileDesc->iFd);
@@ -91,6 +94,10 @@ static int CgiWriteToClient(int iClient, struct FileDesc *ptFileDesc)
         close(iCgiInFd[0]);
 
         CgiHeader(iClient);
+
+        /* cgi 程序从标准输入获得参数 */
+        strTmp = ptReqHeader->strPostArgs;
+        write(iCgiInFd[1], strTmp, ptReqHeader->iContLen);
 
         /* 从子进程的输出端读取数据，发送到客户端进行显示 */
         while (read(iCgiOutFd[0], &cByte, 1) > 0){

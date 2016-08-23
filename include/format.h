@@ -21,7 +21,7 @@ struct FormatMgr
 {
     char *name;
     int (*isSupport)(struct FileDesc *ptFileDesc);
-    int (*WriteToClient)(int iClient, struct FileDesc *ptFileDesc);
+    int (*WriteToClient)(int iClient, struct FileDesc *ptFileDesc, struct RequestHeader *ptReqHeader);
     int (*ReadFromClient)(int iClient, char *strPath);
     struct list_head tFormatMgr;
 };
