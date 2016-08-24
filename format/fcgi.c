@@ -45,15 +45,25 @@ static int isSupportCgi(struct FileDesc *ptFileDesc)
     return 0;
 }
 
+/**********************************************************************
+ * 函数名称： CgiWriteToClient
+ * 功能描述： 执行 CGI 程序并且发送结果到客户端
+ * 输入参数： iSockFd         客户端 socket 描述符
+ *            struct FileDesc 文件描述结构体
+ * 输出参数： 空
+ * 返 回 值： -1     - 失败
+ *            0      - 成功
+ * 修改日期        版本号     修改人	      修改内容
+ * -----------------------------------------------
+ * 2016/08/24	     V0.2	      黄泊翰        创建
+ ***********************************************************************/
 static int CgiWriteToClient(int iClient, struct FileDesc *ptFileDesc, struct RequestHeader *ptReqHeader)
 {
 	int iCgiOutFd[2];
 	int iCgiInFd[2];
     pid_t ForkPid;
     char cByte = '\0';
-    fd_set WriteSet;
     char *strTmp;
-    int i = 0;
 
     munmap(ptFileDesc->pucMem, ptFileDesc->tFStat.st_size);
     close(ptFileDesc->iFd);

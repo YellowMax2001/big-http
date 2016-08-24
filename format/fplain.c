@@ -33,7 +33,6 @@ static int PlainWriteToClient(int iClient, struct FileDesc *ptFileDesc, struct R
     unsigned char *pucMemStart = ptFileDesc->pucMem;
     unsigned char *pucMem;
     int iSendLen = 0;
-    fd_set WriteSet;
 
     PlainHeader(iClient);
 

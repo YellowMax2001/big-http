@@ -17,7 +17,8 @@ struct RequestHeader
 int GetRequestHeader(int iSockFd, struct RequestHeader *ptReqHeader);
 int PutResponseHeader(int iSockFd, struct RequestHeader *ptReqHeader);
 void NoSuchFile(int iSockFd);
-void bad_request(int iSockFd);
+void BadGateway(int iSockFd);
+void BadRequest(int iSockFd);
 void ErrorExec(int iSockFd);
 void HtmlHeader(int iSockFd);
 void CgiHeader(int iSockFd);

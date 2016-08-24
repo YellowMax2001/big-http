@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/socket.h>
 #include <string.h>
 #include <pthread.h>
@@ -13,6 +14,17 @@
 #include <unistd.h>
 #include <signal.h>
 
+/**********************************************************************
+ * 函数名称： CreateServerSocket
+ * 功能描述： 为该服务器进程初始化一个 socket
+ * 输入参数： 空
+ * 输出参数： socket 文件描述符
+ * 返 回 值： -1     - 创建失败
+ *            0      - 创建成功
+ * 修改日期        版本号     修改人	      修改内容
+ * -----------------------------------------------
+ * 2016/08/24	     V0.2	      黄泊翰        创建
+ ***********************************************************************/
 static int CreateServerSocket(void)
 {
     int iError = 0;
@@ -49,6 +61,16 @@ static int CreateServerSocket(void)
 	return iServerSocket;
 }
 
+/**********************************************************************
+ * 函数名称： HandleRequest
+ * 功能描述： 响应客户端的请求
+ * 输入参数： 客户端的 socket 
+ * 输出参数： 空
+ * 返 回 值： 空
+ * 修改日期        版本号     修改人	      修改内容
+ * -----------------------------------------------
+ * 2016/08/24	     V0.2	      黄泊翰        创建
+ ***********************************************************************/
 #if 0
 static void *HandleRequest(void *Data)
 {
@@ -118,6 +140,34 @@ static void HandleRequest(int iClientSocketFd)
 }
 #endif
 
+/**********************************************************************
+ * 函数名称： ReadyEnv
+ * 功能描述： 为服务器进程准备环境
+ * 输入参数： 空
+ * 输出参数： 空
+ * 返 回 值： -1     - 失败
+ *            0      - 成功
+ * 修改日期        版本号     修改人	      修改内容
+ * -----------------------------------------------
+ * 2016/08/24	     V0.2	      黄泊翰        创建
+ ***********************************************************************/
+static int ReadyEnv(void)
+{
+    int iError = 0;
+
+    /* 防止由于子进程先于父进程退出，
+     *而父进程没有调用 waitpid/wait 导致僵尸进程 
+     *这里忽略 SIGCHLD 信号
+     */
+    signal(SIGCHLD,SIG_IGN);
+
+	umask(077);    /* new_access = old_access & ~077 */
+
+    iError = chdir(SERVER_ROOT);
+
+    return iError;
+}
+
 int main(int argc, char *argv[])
 {
     int iError = 0;
@@ -133,6 +183,12 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    iError = ReadyEnv();
+    if(iError){
+        DebugPrint("ReadyEnv error\n");
+        return -1;
+    }
+
     iServerSocketFd = CreateServerSocket();
 	if(-1 == iServerSocketFd){
         perror("main::CreateServerSocket");
@@ -143,12 +199,6 @@ int main(int argc, char *argv[])
         close(iServerSocketFd);
         return 0; 
     }
-
-    /* 防止由于子进程先于父进程退出，
-     *而父进程没有调用 waitpid/wait 导致僵尸进程 
-     *这里忽略 SIGCHLD 信号
-     */
-    signal(SIGCHLD,SIG_IGN);
 
     while(1){
         iClientSocketFd = accept(iServerSocketFd, (struct sockaddr *)&tClientSockaddr, &ClientSockLen);

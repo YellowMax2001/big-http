@@ -22,8 +22,8 @@ void SocketPrintf(int iSockFd, const char *pcData)
 
 void NoSuchFile(int iSockFd)
 {	
-    SocketPrintf(iSockFd, "HTTP/1.0 404 NOT FOUND");
-    SocketPrintf(iSockFd, SERVER_NAME);
+    SocketPrintf(iSockFd, SERVER_PROTOCOL" 404 NOT FOUND");
+    SocketPrintf(iSockFd, SERVER_SOFTWARE);
     SocketPrintf(iSockFd, "Content-Type: text/html\r\n");
     SocketPrintf(iSockFd, 
         "<html>                      \
@@ -37,8 +37,8 @@ void NoSuchFile(int iSockFd)
 
 void ErrorExec(int iSockFd)
 {
-    SocketPrintf(iSockFd, "HTTP/1.0 500 Internal Server Error");
-    SocketPrintf(iSockFd, SERVER_NAME);
+    SocketPrintf(iSockFd, SERVER_PROTOCOL" 500 Internal Server Error");
+    SocketPrintf(iSockFd, SERVER_SOFTWARE);
     SocketPrintf(iSockFd, "Content-type: text/html\r\n");
     SocketPrintf(iSockFd, 
         "<html>                      \
@@ -50,15 +50,30 @@ void ErrorExec(int iSockFd)
         ");
 }
 
-void bad_request(int iSockFd)
+void BadGateway(int iSockFd)
 {
-    SocketPrintf(iSockFd, "HTTP/1.0 400 BAD REQUEST");
+    SocketPrintf(iSockFd, SERVER_PROTOCOL" 502 Bad Gateway");
+    SocketPrintf(iSockFd, SERVER_SOFTWARE);
+    SocketPrintf(iSockFd, "Content-type: text/html\r\n");
+    SocketPrintf(iSockFd, 
+        "<html>                      \
+            <title>Bad gateway</title> \
+            <body>                   \
+                <h2>The CGI was not CGI/1.1 compliant.</h2> \
+            </body>                  \
+         </html>                     \
+        ");
+}
+
+void BadRequest(int iSockFd)
+{
+    SocketPrintf(iSockFd, SERVER_PROTOCOL" 400 BAD REQUEST");
     SocketPrintf(iSockFd, "Content-type: text/html\r\n");
     SocketPrintf(iSockFd, 
         "<html>                      \
             <title>Error request</title> \
             <body>                   \
-                <h2>Your browser sent a bad request.</h2> \
+                <h2>Your browser sent a bad request, such as url is too long.</h2> \
             </body>                  \
          </html>                     \
         ");
@@ -66,53 +81,71 @@ void bad_request(int iSockFd)
 
 void HtmlHeader(int iSockFd)
 {
-    SocketPrintf(iSockFd, "HTTP/1.0 200 OK");
-    SocketPrintf(iSockFd, SERVER_NAME);
+    SocketPrintf(iSockFd, SERVER_PROTOCOL" 200 OK");
+    SocketPrintf(iSockFd, SERVER_SOFTWARE);
     SocketPrintf(iSockFd, "Content-Type: text/html\r\n");
 }
 
 void CgiHeader(int iSockFd)
 {
-    SocketPrintf(iSockFd, "HTTP/1.0 200 OK");
-    SocketPrintf(iSockFd, SERVER_NAME);
-    SocketPrintf(iSockFd, "Content-Type: text/html\r\n");
+    SocketPrintf(iSockFd, SERVER_PROTOCOL" 200 OK");
+    SocketPrintf(iSockFd, SERVER_SOFTWARE);
+
+    /* 在 cgi 程序当中添加报文头的结尾 */
 }
 
 void PlainHeader(int iSockFd)
 {
     SocketPrintf(iSockFd, "HTTP/1.0 200 OK");
-    SocketPrintf(iSockFd, SERVER_NAME);
+    SocketPrintf(iSockFd, SERVER_SOFTWARE);
     SocketPrintf(iSockFd, "Content-Type: text/plain\r\n");
 }
 
+/**********************************************************************
+ * 函数名称： SetEnv
+ * 功能描述： 为 CGI 程序创建环境变量
+ * 输入参数： struct RequestHeader 请求报文头
+ * 输出参数： 空
+ * 返 回 值： 空
+ * 修改日期        版本号     修改人	      修改内容
+ * -----------------------------------------------
+ * 2016/08/24	     V0.2	      黄泊翰        创建
+ ***********************************************************************/
 static void SetEnv(struct RequestHeader *ptReqHeader)
 {
-    char strArgs[1024] = "\0";
-    char strMethod[256] = "\0";
-    char strContType[256] = "\0";
+    char strTmp[256];
+
+    /* 方法 */
+    setenv("REQUEST_METHOD", ptReqHeader->strMethod, 1);
 
     /* 参数 */
     if(!strcmp(ptReqHeader->strMethod, "GET")){
-        snprintf(strArgs, 256, "QUERY_STRING=%s", ptReqHeader->strGetArgs);
-        strArgs[255] = '\0';
-        putenv(strArgs);
+        setenv("QUERY_STRING", ptReqHeader->strGetArgs, 1);
     }else if(!strcmp(ptReqHeader->strMethod, "POST")){
         /* 重要，这个参数要给 cgi 程序使用，以获得传进来的参数 */
-        snprintf(strContType, 256, "CONTENT_TYPE=%s", ptReqHeader->strContType);
-        strContType[255] = '\0';
-        putenv(strContType);
+        setenv("CONTENT_TYPE", ptReqHeader->strContType, 1);
 
-        snprintf(strArgs, 256, "CONTENT_LENGTH=%d", ptReqHeader->iContLen);
-        strArgs[255] = '\0';
-        putenv(strArgs);
+        sprintf(strTmp, "%d", ptReqHeader->iContLen);
+        setenv("CONTENT_LENGTH", strTmp, 1);
     }
 
-    /* 方法 */
-    snprintf(strMethod, 255, "REQUEST_METHOD=%s", ptReqHeader->strMethod);
-    strMethod[255] = '\0';
-    putenv(strMethod);
+    setenv("SERVER_PROTOCOL", SERVER_PROTOCOL, 1); 
+    setenv("GATEWAY_INTERFACE", GATEWAY_INTERFACE, 1); 
+    setenv("SERVER_NAME", SERVER_NAME, 1); 
 }
 
+/**********************************************************************
+ * 函数名称： GetRequestHeader
+ * 功能描述： 获取客户端发来的请求头部
+ * 输入参数： iSockFd              客户端 socket 描述符
+ *            struct RequestHeader 客户端请求头部
+ * 输出参数： 空
+ * 返 回 值： -1     - 失败
+ *            0      - 成功
+ * 修改日期        版本号     修改人	      修改内容
+ * -----------------------------------------------
+ * 2016/08/24	     V0.2	      黄泊翰        创建
+ ***********************************************************************/
 int GetRequestHeader(int iSockFd, struct RequestHeader *ptReqHeader)
 {
     int iRecvNum = 0;
@@ -161,6 +194,10 @@ int GetRequestHeader(int iSockFd, struct RequestHeader *ptReqHeader)
         }
     }
 
+    if(iPostArgLen > SINGLE_UPLOAD_SIZE){
+        BadRequest(iSockFd);
+        return -1;
+    }
     ptReqHeader->strPostArgs = malloc(iPostArgLen);    /* 分配空间 */
     if(NULL == ptReqHeader->strPostArgs){
         perror("GetRequestHeader::malloc");
@@ -182,6 +219,18 @@ int GetRequestHeader(int iSockFd, struct RequestHeader *ptReqHeader)
     return 0;
 }
 
+/**********************************************************************
+ * 函数名称： PutResponseHeader
+ * 功能描述： 获取客户端发来的请求头部
+ * 输入参数： iSockFd              客户端 socket 描述符
+ *            struct RequestHeader 客户端请求头部
+ * 输出参数： 空
+ * 返 回 值： -1     - 失败
+ *            0      - 成功
+ * 修改日期        版本号     修改人	      修改内容
+ * -----------------------------------------------
+ * 2016/08/24	     V0.2	      黄泊翰        创建
+ ***********************************************************************/
 int PutResponseHeader(int iSockFd, struct RequestHeader *ptReqHeader)
 {
     int iError = 0;
